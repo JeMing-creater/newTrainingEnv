@@ -1,0 +1,61 @@
+{   
+    /* huggingface training arg setting */
+    "num_train_epochs": 300,
+    "per_device_train_batch_size": 2,
+    "per_device_eval_batch_size": 1,
+    "load_best_model_at_end": true,
+    "lr_scheduler_type": "cosine",
+    "batch_eval_metrics": true,
+    "greater_is_better": true,
+    "learning_rate": 0.001,
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.98,
+    "weight_decay": 0.05,
+    "adam_epsilon": 1e-6,
+    "warmup_ratio": 0.01,
+    "eval_delay": 1,
+    "do_train": true,
+    "do_eval": true,
+    /* some training functions */
+    "metric_for_best_model": "Dice/Mean",
+    "save_total_limit": 3,
+    "max_grad_norm": 1.0,
+    "remove_unused_columns": false,
+    "ddp_find_unused_parameters": true,
+    /* log setting */
+    "logging_steps": 1,
+    "report_to": "tensorboard",
+    "overwrite_output_dir": false,
+    "resume_from_checkpoint": false,
+    /* checkpoint and save model */
+    "output_dir": "./output/hwaunetr",
+    "eval_strategy": "epoch",
+    "save_strategy": "epoch",
+    /* dataset loading setting For DataArguments */
+    // dataloader setting
+    "dataloader_num_workers": 8,
+    "dataloader_persistent_workers": true,
+    "dataloader_prefetch_factor": 2,
+    // specially for our dataset
+    "root_dir": "/workspace/Jeming/data/",
+    "check_models": ["ADC", "T2_FS", "V"],
+    "model_scale": [[0,6000],[0,4500],[0,4500]],
+    "target_size": [128, 128, 64],
+    "train_ratio": 0.7,
+    "val_ratio": 0.1,
+    "test_ratio": 0.2,
+    /* modeling setting For ModelArguments */
+    "in_chans": 4,
+    "out_chans": 3,
+    "d_state": 16,
+    "d_conv": 4,
+    "expand": 2,
+    "hidden_size": 768,
+    "fussion": [1, 2, 4, 8],
+    "kernel_sizes": [4, 2, 2, 2],
+    "depths": [1, 1, 1, 1],
+    "dims": [48, 96, 192, 384],
+    "heads": [1, 2, 4, 4],
+    "num_slices_list": [64, 32, 16, 8],
+    "out_indices": [0, 1, 2, 3]
+}

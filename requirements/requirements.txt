@@ -1,0 +1,13 @@
+timm==0.9.7
+objprint==0.2.3
+accelerate==0.26.0
+torch
+tensorboard
+easydict
+SimpleITK
+monai
+nibabel
+loguru
+pytz
+loguru
+opencv-python
