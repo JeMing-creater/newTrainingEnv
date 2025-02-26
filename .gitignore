@@ -5,7 +5,7 @@ output
 __pycache__
 model_store
 src/__pycache__
-jsons/load.jsons
+jsons/load.json
 src/model/__pycache__
 requirements/Mamba/causal-conv1d/build
 requirements/Mamba/causal-conv1d/causal_conv1d.egg-info

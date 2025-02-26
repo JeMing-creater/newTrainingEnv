@@ -122,21 +122,22 @@ def train(
     
     
     # checkpoint
-    checkpoint = set_checkpoint(logger=logger, training_args=training_args)
+    checkpoint, training_args = set_checkpoint(logger=logger, training_args=training_args)
     
     # training 
     logger.info("Starting training")
     trainer = Trainer(
-        model,
-        training_args,
-        compute_metrics=compute_metrics,
-        train_dataset=train_dataset,
-        eval_dataset=val_dataset,
-        # data_collator=DataCollatorWithPadding(tokenizer=tokenizer),
-        callbacks=[LogCallback()],
-    )
-    
+            model,
+            training_args,
+            compute_metrics=compute_metrics,
+            train_dataset=train_dataset,
+            eval_dataset=val_dataset,
+            # data_collator=DataCollatorWithPadding(tokenizer=tokenizer),
+            callbacks=[LogCallback()],
+        )
     trainer.train(resume_from_checkpoint=checkpoint)
+    
+    
     
     # Evaluate and save model 
     metirc = trainer.evaluate(test_dataset)

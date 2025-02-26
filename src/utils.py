@@ -55,10 +55,12 @@ def set_checkpoint(logger, training_args):
     ):
         last_checkpoint = get_last_checkpoint(training_args.output_dir)
         if last_checkpoint is None and len(os.listdir(training_args.output_dir)) > 0:
-            raise ValueError(
+            logger.info(
                 f"Output directory ({training_args.output_dir}) already exists and is not empty. "
                 "Use --overwrite_output_dir to overcome."
             )
+            # set for alread overwrite setting, if no checkpoint but overwrite is false will sent ValueError
+            training_args.overwrite_output_dir = True
         elif (
             last_checkpoint is not None and training_args.resume_from_checkpoint is None
         ):
@@ -74,7 +76,7 @@ def set_checkpoint(logger, training_args):
     elif last_checkpoint is not None:
         checkpoint = last_checkpoint
     
-    return checkpoint
+    return checkpoint, training_args
 
 # some notes will be writed in json, need to remove
 def check_json(input_path: str) -> str:
