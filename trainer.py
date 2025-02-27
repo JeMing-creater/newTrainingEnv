@@ -77,6 +77,8 @@ def compute_metrics(eval_pred: EvalPrediction, compute_result=False):
         if compute_result == True:
             dice_acc = dice_metrics.aggregate()[0]
             hd95_acc = hd95_metrics.aggregate()[0]
+            dice_metrics.reset()
+            hd95_metrics.reset()
             scores = {
                 f"Dice/Mean": float(dice_acc.mean()),
                 f"Dice/ADC": float(dice_acc[0]),
@@ -87,6 +89,7 @@ def compute_metrics(eval_pred: EvalPrediction, compute_result=False):
                 f"Hd95/T2_FS": float(hd95_acc[1]),
                 f"Hd95/V": float(hd95_acc[2]),
             }
+            
             
     return scores if compute_result else None
 

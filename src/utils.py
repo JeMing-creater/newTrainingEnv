@@ -61,6 +61,7 @@ def set_checkpoint(logger, training_args):
             )
             # set for alread overwrite setting, if no checkpoint but overwrite is false will sent ValueError
             training_args.overwrite_output_dir = True
+            training_args.resume_from_checkpoint = False
         elif (
             last_checkpoint is not None and training_args.resume_from_checkpoint is None
         ):
@@ -68,6 +69,8 @@ def set_checkpoint(logger, training_args):
                 f"Checkpoint detected, resuming training at {last_checkpoint}. To avoid this behavior, change "
                 "the `--output_dir` or add `--overwrite_output_dir` to train from scratch."
             )
+            training_args.overwrite_output_dir = True
+            training_args.resume_from_checkpoint = False
     
     # use checkpoint for training resuming        
     checkpoint = None

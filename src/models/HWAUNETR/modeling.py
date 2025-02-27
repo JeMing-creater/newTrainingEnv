@@ -435,7 +435,7 @@ class HWAUNETRForSegmentation(HWAUNETRPreTrainedModel):
 
 
 if __name__ == '__main__':
-    device = 'cuda'
+    device = 'cuda:3'
     # x = torch.randn(size=(1, 4, 96, 96, 96)).to(device)
     # x = torch.randn(size=(1, 4, 128, 128, 128)).to(device)
     x = torch.randn(size=(2, 3, 128, 128, 64)).to(device)
